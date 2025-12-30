@@ -1,0 +1,55 @@
+name: Publish CLI to PyPI
+
+on:
+  push:
+    tags:
+      - "cli-v*"
+  # Optional: allow manual runs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # required for PyPI Trusted Publishing (OIDC)
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Install dependencies (cli)
+        #working-directory: cli
+        run: poetry install --no-interaction
+
+      - name: Verify tag matches pyproject version
+        #working-directory: cli
+        shell: bash
+        run: |
+          TAG="${GITHUB_REF_NAME}"           # e.g. cli-v1.2.3
+          TAG_VERSION="${TAG#cli-v}"         # 1.2.3
+          POETRY_VERSION="$(poetry version -s)"
+          test "$TAG_VERSION" = "$POETRY_VERSION"
+
+      - name: Build (cli)
+        #working-directory: cli
+        run: poetry build
+
+      # Upload using Trusted Publishing (OIDC). This action is the stable interface recommended by PyPI.
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          #packages-dir: cli/dist
+          packages-dir: dist
