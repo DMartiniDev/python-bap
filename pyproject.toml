@@ -1,6 +1,6 @@
 [project]
 name = "python-bap"
-version = "1.0.0"
+version = "1.0.1"
 description = ""
 authors = [
     {name = "Dave Martinez",email = "34991082+dkm-coder@users.noreply.github.com"}

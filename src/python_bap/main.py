@@ -4,8 +4,11 @@ import typer
 app = typer.Typer()
 
 @app.command()
-def main(name: str):
+def main(name: str, language: str = 'en'):
     """
     Greet the user
     """
-    typer.echo(f"Hello {name}")
+    if language == 'sp':
+        typer.echo(f"Hola {name}")
+    else:
+        typer.echo(f"Hello {name}")
