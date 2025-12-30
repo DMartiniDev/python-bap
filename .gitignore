@@ -1,22 +1,21 @@
 # Poetry / packaging
-dist/
-build/
-*.egg-info/
+dist
+build
+*.egg-info
 
 # Virtual environments
-.venv/
+.venv
 
 # Python
-__pycache__/
 *.py[cod]
+__pycache__
 
 # Testing
-.pytest_cache/
+.pytest_cache
 .coverage
-htmlcov/
+htmlcov
 
 # Editors / OS
-.vscode/
-.idea/
+.vscode
+.idea
 .DS_Store
-
