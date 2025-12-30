@@ -17,3 +17,19 @@ poetry.lock           <- Dependency lock file
 pyproject.toml        <- Config file for the project
 README.md             <- This file
 ```
+
+## Bumping the version
+
+It is possible to bump the version of the project using the `poetry version` command with one of the following values as an argument:
+
+- `patch`
+- `minor`
+- `major`
+
+## Build and publish the project
+
+We can build and publish the project by using the following command:
+
+```bash
+poetry publish --build
+```
