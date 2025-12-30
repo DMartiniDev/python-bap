@@ -26,10 +26,25 @@ It is possible to bump the version of the project using the `poetry version` com
 - `minor`
 - `major`
 
-## Build and publish the project
+## Publishing new version
 
-We can build and publish the project by using the following command:
+### Manually
+
+If we want to publish the a version of the project to PyPI manually, we can do that by using the following command:
 
 ```bash
 poetry publish --build
 ```
+
+> For this to work, we will need to get a Token from PyPI and configure it so that Poetry uses it to publish the package.
+
+### Using GitHub Actions
+
+In order to get GitHub actions to publish a new version of our code, we will need to do the following:
+
+- In your PyPI account, configure a new [Trusted Publisher](https://pypi.org/manage/project/python-bap/settings/publishing/)
+  - Specify Owner
+  - Specify repository name
+  - Specify the workflow name
+
+Once done, you can create a tag which looks like `cli-vX.X.X` and this will trigger the workflow which will publish the version to PyPI.
